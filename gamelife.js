@@ -1,45 +1,4 @@
-// function有很多种写法如下几种
-/**window.onload=function(){
-	var button=document.getElementById("previewButton")
-	button.onclick=previewHandler;
-}
-window.onload=function(){
-	var button=document.getElementById("startButton")
-	button.onclick=startHandler;
-}
-window.onload=function(){
-	var button=document.getElementById("pauseButton")
-	button.onclick=pauseHandler;
-}
-window.onload=function(){
-	var button=document.getElementById("resetButton")
-	button.onclick=resetHandler;
-}
-window.onload=function(){
-	var button=document.getElementById("previewButton")
-	button.onclick=previewHandler;
-}
-function previewHandler(){
-	var canvas =document.getElementById("tshirtCanvas")
-	var context=canvas.getContext("2d");
 
-	var selectObj=document.getElementById("shape");
-	var index=selectObj.selectedIndex;
-	var shape=selectObj[index].value;
-
-	if (shape=="squares") {
-		for (var squares = 0; squares < 20; squares++) {
-			drawSquare(canvas,context);
-		}
-	}
-}
-function drawSquare(canvas,context){
-	var w=Math.floor(Math.random()*40);
-	var x=Math.floor(Math.random()*canvas.width);
-	var y=Math.floor(Math.random()*canvas.height);
-	context.fillStyle="lightblue";
-	context.fillRect(x,y,w,w);
-}**/
 var inputcount=0;
 var n=20,z=50,p=30;
 window.onload=function(){
@@ -55,7 +14,7 @@ window.onload=function(){
 	var button3=document.getElementById("pauseButton")
 	button3.onclick=pauselife;
 }
-
+//画网格
 function drawLines(canvas,context){
 	context.fillStyle="#000000";
 	var positionX=[];
@@ -88,25 +47,23 @@ for (var i = 0; i < z; i++) {
   	nextGeneration[i][j]=0;
   }
 }
+//展示画图
 function displaylife(life){
 	var canvas =document.getElementById("gameCanvas")
 	var context=canvas.getContext("2d");
 	for (var i = 0; i < p; i++) {
-	//for (var i = 10; i < 40; i++) {	
 		for (var j = 0; j < p; j++) {
-		//for (var j = 10; j < 40; j++) {
 		if (life[i][j]==1){
 			context.fillStyle="#FF0000";
-			//context.fillRect((i-10)*20+1,(j-10)*20+1,18,18);
 			context.fillRect(i*20+1,j*20+1,18,18);
 		} else if (life[i][j]==0) {
 			context.fillStyle="#FFFFFF";
-			//context.fillRect((i-10)*20+1,(j-10)*20+1,18,18);
 			context.fillRect(i*20+1,j*20+1,18,18);
 		}
 		}
 	}
 }
+//随机初始赋值
 function inputlife(){
 	for (var i = 0; i < z; i++) {
 		for (var j = 0; j < z; j++) {
@@ -116,27 +73,7 @@ function inputlife(){
 	displaylife(firstGeneration);
 	inputcount++;
 }
-/**function evolutionlife(life){
-	for (var i = 1; i < n; i++) {
-		for (var j = 1; j < n; j++) {
-  		var count=life[i][j]+life[i-1][j]+life[i+1][j]+life[i][j-1]+life[i][j+1]+life[i+1][j+1]+life[i+1][j-1]+life[i-1][j+1]+life[i-1][j-1];
-  			if (life[i][j ]== 1 && count == 2) {
-  			life[i][j]=1;
-  			}
-  			else if (count==3) {
-  				life[i][j]==1;
-  			}else{
-  				life[i][j]=0;
-  			}
-  	    }	
-	}
-	for (var i = 0; i < n; i++) {
-		for (var j = 0; j < n; j++) {
-			nextGeneration[i][j]=life[i][j];
-		}
-	}
-	return life;
-}**/
+//生存规则
 function evolutionlife(life){
 	var nextround=new Array()
 	for (var i = 0; i < z; i++) {
@@ -166,9 +103,9 @@ function evolutionlife(life){
 			nextGeneration[i][j]=nextround[i][j];
 		}
 	}
-	//inputcount++;
 	return nextround;
 }
+//自动演化
 function autolife(){
 	if(inputcount==0){
 		inputlife();
@@ -183,9 +120,11 @@ function autolife(){
 		},z);
 	}
 }
+//重置
 function resetlife(){
 	return window.location.reload()
 }
+//暂停
 function pauselife(){
 	if(inputcount==0){
 		return clearInterval(ss)
