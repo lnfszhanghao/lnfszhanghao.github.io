@@ -110,12 +110,12 @@ function autolife(){
 	if(inputcount==0){
 		inputlife();
 		displaylife(evolutionlife(firstGeneration));
-		var ss=setInterval(function(){
+		setInterval(function(){
 			displaylife(evolutionlife(nextGeneration));
 		},z);
 	} else {
 		displaylife(evolutionlife(firstGeneration));
-		var ss1=setInterval(function(){
+		setInterval(function(){
 			displaylife(evolutionlife(nextGeneration));
 		},z);
 	}
@@ -125,11 +125,8 @@ function resetlife(){
 	return window.location.reload()
 }
 //暂停
+var ss=setInterval(function(){
+			displaylife(evolutionlife(nextGeneration));},z);
 function pauselife(){
-	if(inputcount==0){
-		return clearInterval(ss)
-	} else {
-		return clearInterval(ss1)
-	}
 	return clearInterval(ss)
 }
