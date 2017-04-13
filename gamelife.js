@@ -1,6 +1,6 @@
 
 var inputcount=0;
-var n=20,z=50,p=30;
+var n=20,z=20,p=20;
 window.onload=function(){
 	var canvas =document.getElementById("gameCanvas")
 	var context=canvas.getContext("2d");
@@ -110,12 +110,12 @@ function autolife(){
 	if(inputcount==0){
 		inputlife();
 		displaylife(evolutionlife(firstGeneration));
-		setInterval(function(){
+		ss=setInterval(function(){
 			displaylife(evolutionlife(nextGeneration));
 		},z);
 	} else {
 		displaylife(evolutionlife(firstGeneration));
-		setInterval(function(){
+		ss=setInterval(function(){
 			displaylife(evolutionlife(nextGeneration));
 		},z);
 	}
@@ -125,8 +125,7 @@ function resetlife(){
 	return window.location.reload()
 }
 //暂停
-var ss=setInterval(function(){
-			displaylife(evolutionlife(nextGeneration));},z);
+var ss
 function pauselife(){
 	return clearInterval(ss)
 }
